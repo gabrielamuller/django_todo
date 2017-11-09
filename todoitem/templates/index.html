@@ -7,14 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-   <h1>Hello World!</h1> 
+   <h1>Things I have to do!</h1> 
    
    <ul>
       {% for item in items %}
           {%  if item.done %}
-              <li><strike>{{ item.name }}</strike></li>
+              <li><strike><a href="/edit/{{ item.id }}">{{ item.name }}</a></strike></li>  
           {% else %}
-              <li>{{ item.name }}</li>
+              <li><a href="/edit/{{ item.id }}">{{ item.name }}</a></li> 
           {% endif %}
       {% endfor %}
    </ul>
