@@ -37,3 +37,12 @@ def edit_item(request, id):
         
     return render(request, "item_form.html", { 'form': form, })  
     
+def toggle_item(request, id):
+    item = get_object_or_404(TodoItem, pk=id)
+    item.done = not item.done
+    ##if item.done:
+    ##  item.done = False
+    ## else:
+    ##  item.done = True
+    item.save()
+    return redirect(get_index) 

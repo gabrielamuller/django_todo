@@ -9,15 +9,28 @@
 <body>
    <h1>Things I have to do!</h1> 
    
-   <ul>
-      {% for item in items %}
-          {%  if item.done %}
-              <li><strike><a href="/edit/{{ item.id }}">{{ item.name }}</a></strike></li>  
-          {% else %}
-              <li><a href="/edit/{{ item.id }}">{{ item.name }}</a></li> 
-          {% endif %}
-      {% endfor %}
-   </ul>
+   <table>
+        {% for item in items %}
+        <tr>
+            {% if item.done %}
+            <td><strike>{{ item.name }}</strike></td>
+            {% else %}
+            <td>{{ item.name }}</td>
+            {% endif %}
+            
+            <td>
+                <form method="POST" action="toggle/{{ item.id }}">{% csrf_token %}<input type="submit" value="Toggle"></form>
+            </td>
+            
+            <td>
+                <form method="GET" action="edit/{{ item.id }}"><input type="submit" value="Edit"></form>
+            </td>
+        </tr>
+        {% empty %}
+        <p>You have nothing to do.</p>
+        {% endfor %}
+
+    </table>
    <hr>
    <a href="add">Add an item</a>
    
